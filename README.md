@@ -1,6 +1,3 @@
-Certainly! My apologies for the confusion. Here is the complete README.md content in markdown format:
-
-```markdown
 # Tic Tac Toe Game
 
 ![Tic Tac Toe Logo](https://raw.githubusercontent.com/MineisZarox/TicTacToe/master/assets/tic.png)
