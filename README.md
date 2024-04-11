@@ -2,6 +2,9 @@
 
 ![Tic Tac Toe Logo](https://raw.githubusercontent.com/MineisZarox/TicTacToe/master/assets/tic.png)
 
+
+### Download - [v0.1 tictactoe.exe]()
+
 ## Overview
 
 This is a simple implementation of a Tic Tac Toe game using Pygame. The game features a graphical user interface (GUI) and is structured using object-oriented programming (OOP) principles.
@@ -14,8 +17,30 @@ This is a simple implementation of a Tic Tac Toe game using Pygame. The game fea
 - Victory, defeat, and tie screens.
 - Reset option to play again.
 
-## Getting Started
+## Gameplay
 
+- Launch the game and navigate through the welcome screen.
+- Click the "Start" button to begin the game.
+- Make your moves by clicking on the desired empty cell.
+- The game alternates between player (X) and AI (O) turns.
+- After the game ends, you can choose to reset or exit.
+
+## `oBrain` Function Logic
+
+The `oBrain` function serves as the AI logic for the game. It attempts to make strategic moves by identifying potential winning combinations for the AI (O) based on the current state of the board.
+
+1. It first checks if there are two O's in a winning combination and returns the remaining empty cell to complete the sequence.
+2. If no potential winning moves are found for the AI, it checks for potential winning moves for the player (X) and attempts to block them.
+3. The function returns `None` if no immediate winning or blocking moves are identified.
+
+
+## Getting Started
+<img src="https://raw.githubusercontent.com/MineisZarox/TicTacToe/master/snapshots/Capture.JPG">
+<img src="https://raw.githubusercontent.com/MineisZarox/TicTacToe/master/snapshots/Capture2.JPG">
+<img src="https://raw.githubusercontent.com/MineisZarox/TicTacToe/master/snapshots/Capture3.JPG">
+<img src="https://raw.githubusercontent.com/MineisZarox/TicTacToe/master/snapshots/Capture4.JPG">
+
+If you wish to run from python file -
 ### Prerequisites
 
 - Python 3.x
@@ -38,22 +63,6 @@ cd TicTacToe
 ```bash
 python tictactoe.py
 ```
-
-## Gameplay
-
-- Launch the game and navigate through the welcome screen.
-- Click the "Start" button to begin the game.
-- Make your moves by clicking on the desired empty cell.
-- The game alternates between player (X) and AI (O) turns.
-- After the game ends, you can choose to reset or exit.
-
-## `oBrain` Function Logic
-
-The `oBrain` function serves as the AI logic for the game. It attempts to make strategic moves by identifying potential winning combinations for the AI (O) based on the current state of the board.
-
-1. It first checks if there are two O's in a winning combination and returns the remaining empty cell to complete the sequence.
-2. If no potential winning moves are found for the AI, it checks for potential winning moves for the player (X) and attempts to block them.
-3. The function returns `None` if no immediate winning or blocking moves are identified.
 
 ## Note
 

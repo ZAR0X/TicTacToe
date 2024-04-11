@@ -1,10 +1,17 @@
-#By Mine is Zarox
-#https://github.com/MineisZarox
+#By Zarox
 
+import os
+import sys
 import time
 import pygame
 import random
 from itertools import combinations
+
+def getPath(pathex):
+    if hasattr(sys, '_MEIPASS'):
+        return str(os.path.join(sys._MEIPASS, pathex)).replace('\\', '/')
+    return str(os.path.join(os.path.abspath("."), pathex)).replace('\\', '/')
+
 
 #Button class
 class Button():
@@ -39,23 +46,24 @@ class Game():
         self.indexes = [{0,1,2}, {3,4,5}, {6,7,8}, {0,3,6}, {1,4,7}, {2,5,8}, {0,4,8}, {2,4,6}]
         pygame.init()
         self.window = pygame.display.set_mode((self.size, self.size))
+        pygame.display.set_icon(pygame.image.load(getPath("assets/icon.png")))
         pygame.display.set_caption("Tic Tac Toe")
         pygame.display.update()
         
         # Music and sound
         pygame.mixer.init()
-        pygame.mixer.music.load(str("assets/minecraft.mp3"))
+        pygame.mixer.music.load(getPath("assets/minecraft.mp3"))
         pygame.mixer.music.play(-1)
 
         # Asset images
-        self.back = pygame.transform.scale(pygame.image.load("assets/back.jpg"), [self.size, self.size]).convert_alpha()
-        self.win = pygame.transform.scale(pygame.image.load("assets/win.jpg"), [self.size, self.size]).convert_alpha()
-        self.lose = pygame.transform.scale(pygame.image.load("assets/lose.jpg"), [self.size, self.size]).convert_alpha()
-        self.tic = pygame.image.load("assets/tic.png")
-        self.start = pygame.image.load("assets/start.png")
-        self.exit = pygame.image.load("assets/close.png")
-        self.reset = pygame.image.load("assets/reset.png")
-        self.tie = pygame.image.load("assets/tie.jpg")
+        self.back = pygame.transform.scale(pygame.image.load(getPath("assets/back.jpg")), [self.size, self.size]).convert_alpha()
+        self.win = pygame.transform.scale(pygame.image.load(getPath("assets/win.jpg")), [self.size, self.size]).convert_alpha()
+        self.lose = pygame.transform.scale(pygame.image.load(getPath("assets/lose.jpg")), [self.size, self.size]).convert_alpha()
+        self.tic = pygame.image.load(getPath("assets/tic.png"))
+        self.start = pygame.image.load(getPath("assets/start.png"))
+        self.exit = pygame.image.load(getPath("assets/close.png"))
+        self.reset = pygame.image.load(getPath("assets/reset.png"))
+        self.tie = pygame.image.load(getPath("assets/tie.jpg"))
 
 
     def get_xo_cords(self):
@@ -94,7 +102,7 @@ class Game():
             pygame.draw.line(surface, (255, 30, 30), (x - size // 2, y - size // 2), (x + size // 2, y + size // 2), thickness)
             pygame.draw.line(surface, (255, 30, 20), (x - size // 2, y + size // 2), (x + size // 2, y - size // 2), thickness)
         if turn == "o":
-            pygame.draw.circle(surface, (0, 0, 0), center, size/2, 8)
+            pygame.draw.circle(surface, (255, 255, 255), center, size/2, 6)
 
 
     def xoCheck(self, xo, secs):
@@ -135,11 +143,11 @@ class Game():
             
 
             if ifstart:
-                pygame.mixer.Sound("assets/button.wav").play()
+                pygame.mixer.Sound(getPath("assets/button.wav")).play()
                 self.main_loop()
                 exit = True
             if ifexit:
-                pygame.mixer.Sound("assets/button.wav").play()
+                pygame.mixer.Sound(getPath("assets/button.wav")).play()
                 exit = True
 
             for event in pygame.event.get():
@@ -156,10 +164,10 @@ class Game():
     def main_loop(self):
         """Main game loop"""
         #usable vars
-        time.sleep(1)
+        time.sleep(0.2)
         exit = False
         game_over = False
-        fps = 5
+        fps = 30
         clock = pygame.time.Clock()
         x, o = "x", "o"
         turn = x
@@ -186,7 +194,7 @@ class Game():
                     self.window.blit(self.win, [0, 0])
                 elif game_over == "o":
                     self.window.blit(self.lose, [0, 0])
-                    if loseAudio: pygame.mixer.Sound("assets/gameover.wav").play()
+                    if loseAudio: pygame.mixer.Sound(getPath("assets/gameover.wav")).play()
                     loseAudio = False
                 else:
                     tie = Button(130, 200, self.tie, 0.7)          
@@ -198,11 +206,11 @@ class Game():
                 ifexit = exitB.draw(self.window)
 
                 if ifstart:
-                    pygame.mixer.Sound("assets/button.wav").play()
+                    pygame.mixer.Sound(getPath("assets/button.wav")).play()
                     self.main_loop()
                     exit = True
                 if ifexit:
-                    pygame.mixer.Sound("assets/button.wav").play()
+                    pygame.mixer.Sound(getPath("assets/button.wav")).play()
                     exit = True
 
 
@@ -216,7 +224,7 @@ class Game():
                         cords = pygame.mouse.get_pos()
                         section = self.get_block_by_cords(cords)
                         if section in [i for i, xo_cords in enumerate(secs) if xo_cords[0] == "0"]:
-                            pygame.mixer.Sound("assets/button.wav").play()
+                            pygame.mixer.Sound(getPath("assets/button.wav")).play()
                             self.draw_xo(self.window, x, self.xoCords[section]) 
                             turn = o
                             secs[section] = (x, self.xoCords[section])
